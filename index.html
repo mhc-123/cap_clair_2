@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cap Clair — Semaine 2 — Rangement intérieur</title>
+  <meta name="description" content="Exercice de rangement intérieur (privé) — Cap Clair Semaine 2" />
+
+  <style>
+    :root{
+      --vert:#A8C1A1;
+      --bleu-clair:#B8CBD0;
+      --bleu-nuit:#344D59;
+      --beige:#FFFAF3;
+      --azur-grise:#9BB0B8;
+      --terracotta:#D49A89;
+      --marron:#815133;
+
+      --bg: var(--beige);
+      --text: var(--bleu-nuit);
+      --card: #ffffff;
+      --border: rgba(52,77,89,.16);
+      --shadow: 0 10px 30px rgba(52,77,89,.10);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(1200px 600px at 10% 0%, rgba(184,203,208,.35), transparent 55%),
+        radial-gradient(900px 500px at 100% 20%, rgba(168,193,161,.35), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      line-height:1.4;
+    }
+
+    .wrap{
+      max-width: 1040px;
+      margin: 28px auto;
+      padding: 0 16px 60px;
+    }
+
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap: 14px;
+      flex-wrap:wrap;
+      margin-bottom: 14px;
+    }
+
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    /* ✅ LOGO — CORRIGÉ */
+    .logo{
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      box-shadow: var(--shadow);
+      border:1px solid rgba(52,77,89,.10);
+      flex: 0 0 auto;
+      object-fit: contain;
+      background:#fff;
+    }
+
+    h1{margin:0;font-size:22px}
+    .subtitle{
+      margin:6px 0 0;
+      color: rgba(52,77,89,.78);
+      max-width: 62ch;
+      font-size: 14.5px;
+    }
+
+    button{
+      border: 1px solid rgba(52,77,89,.18);
+      background: #fff;
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: 800;
+      box-shadow: 0 6px 18px rgba(52,77,89,.08);
+    }
+
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(168,193,161,.85), rgba(184,203,208,.85));
+    }
+
+    .btn-warn{
+      background: linear-gradient(135deg, rgba(212,154,137,.70), rgba(255,250,243,.95));
+    }
+
+    .label-row{
+      display:flex;
+      justify-content:space-between;
+      margin: 12px 0 8px;
+    }
+
+    .label{font-weight:900}
+
+    .help-btn{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:800;
+    }
+
+    textarea,input{
+      width:100%;
+      border-radius:14px;
+      border:1px solid rgba(52,77,89,.18);
+      padding:12px;
+      margin-bottom:12px;
+    }
+
+    details{
+      border:1px solid rgba(52,77,89,.14);
+      border-radius:14px;
+      padding:10px;
+      margin:10px 0;
+      background:#fff;
+    }
+
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      list-style:none;
+    }
+
+    .confusion{
+      margin-top:10px;
+      padding:10px;
+      background:rgba(212,154,137,.12);
+      border-left:4px solid var(--terracotta);
+      border-radius:10px;
+    }
+
+    details.flash{
+      outline:3px solid rgba(168,193,161,.55);
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+  <div class="brand">
+    <!-- ✅ LOGO — ICI -->
+    <img src="img/logo.png" alt="Logo Cap Clair" class="logo">
+    <div>
+      <h1>Cap Clair — Semaine 2 • Rangement intérieur</h1>
+      <p class="subtitle">
+        On range ce qui se mélange sans analyser.
+      </p>
+    </div>
+  </div>
+</header>
+
+<div class="label-row">
+  <div class="label">🟦 Pensées (mental)</div>
+  <button class="help-btn" data-help="help-thoughts">Besoin d’aide ?</button>
+</div>
+<textarea></textarea>
+
+<div class="label-row">
+  <div class="label">🟨 Émotions</div>
+  <button class="help-btn" data-help="help-emotions">Besoin d’aide ?</button>
+</div>
+<textarea></textarea>
+
+<aside>
+  <details id="help-thoughts">
+    <summary>🟦 Pensées (mental)</summary>
+    <p>Scénarios, raisonnements, comparaisons.</p>
+    <div class="confusion">Si ça argumente → ici.</div>
+  </details>
+
+  <details id="help-emotions">
+    <summary>🟨 Émotions</summary>
+    <p>Peur, joie, tristesse, colère…</p>
+    <div class="confusion">Si ça se ressent → ici.</div>
+  </details>
+</aside>
+
+</div>
+
+<script>
+  document.querySelectorAll(".help-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const id = btn.getAttribute("data-help");
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.open = true;
+      el.scrollIntoView({behavior:"smooth", block:"start"});
+      el.classList.add("flash");
+      setTimeout(()=>el.classList.remove("flash"),700);
+    });
+  });
+</script>
+
+</body>
+</html>
