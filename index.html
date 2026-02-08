@@ -518,7 +518,10 @@
 
     function getData(){
       const data = {};
-      fields.forEach(f => data[f] = ($(f).value || "").trim());
+      fields.forEach(f => {
+  const el = $(f);
+  data[f] = (el?.value || "").trim();
+});
       data._savedAt = new Date().toISOString();
       return data;
     }
@@ -529,14 +532,14 @@
 
     function saveLocal(){
       const data = getData();
-      localStorage.setItem("capclair_s3_rangement", JSON.stringify(data));
+      localStorage.setItem("capclair_s2_rangement", JSON.stringify(data));
       toast("Sauvegardé sur ton appareil ✅");
     }
 
     function clearLocal(){
-      localStorage.removeItem("capclair_s3_rangement");
-      localStorage.removeItem("capclair_s3_rangement_autosave");
-      fields.forEach(f => $(f).value = "");
+      localStorage.removeItem("capclair_s2_rangement");
+      localStorage.removeItem("capclair_s2_rangement_autosave");
+      fields.forEach(f => { if($(f)) $(f).value = ""; });
       toast("Effacé sur cet appareil 🧹");
     }
 
